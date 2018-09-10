@@ -1,9 +1,9 @@
 
 
-
 def get_COM(list_coords):
     """Calculate the Center Of Mass of list of coordinates"""
-    assert isinstance(list_coords, list) == True, "Error 1: Input should be a list !"
+    assert isinstance(
+        list_coords, list) == True, "Error 1: Input should be a list !"
     assert len(list_coords) != 0, "Error 1: The list is empty !"
     nb_coords = float(len(list_coords))
     x = 0.0

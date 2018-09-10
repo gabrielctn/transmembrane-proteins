@@ -3,7 +3,7 @@
 
 
 """Usage:
-    tm_prot.py FILE
+    main.py FILE
 
    Options:
     -h --help   Show this
@@ -12,17 +12,33 @@
 
 # IMPORTS
 
-from process_pdb import *
+import process_pdb as process
+from Bio.PDB import NACCESS
+from Bio.PDB import PDBParser
 from docopt import docopt
+import os
+import sys
 
 ###############
 
 
 if __name__ == '__main__':
-    # Parse command line, based on the program's usage. Cf module docstring.
+    # Parse command line
     arguments = docopt(__doc__, version='Transmembrane Protein Areas 1.0')
-    # print(arguments)
-    list_CA = get_ca_coords(arguments["FILE"])
-    center_of_mass = get_COM(list_CA)
+    pdb_file = arguments["FILE"]
+
+    # Run NACCESS with the Biopython wrapper
+    pdb_struct = PDBParser()
+    struct = pdb_struct.get_structure(pdb_file[:4].upper(), pdb_file)
+    model = struct[0]
+    # Set the probe_size to 1.0 angstrom to stick to paper's method.
+    rsa_data, asa_data = NACCESS.run_naccess(model, pdb_file, "1")
+    naccess_rel_dict = NACCESS.process_rsa_data(rsa_data)
+    naccess_atom_dict = NACCESS.process_asa_data(asa_data)
+
+    # Extract C_alpha coordinates
+    list_CA = process.get_ca_coords(pdb_file)
+    # Calculate centre of mass
+    center_of_mass = process.get_COM(list_CA)
     print(list_CA)
     print(center_of_mass)
