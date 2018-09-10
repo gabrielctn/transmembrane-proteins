@@ -12,12 +12,12 @@
 
 # IMPORTS
 
-import process_pdb as process
 from Bio.PDB import NACCESS
 from Bio.PDB import PDBParser
 from docopt import docopt
-import os
-import sys
+import process_pdb as ppdb
+
+
 
 ###############
 
@@ -37,8 +37,8 @@ if __name__ == '__main__':
     naccess_atom_dict = NACCESS.process_asa_data(asa_data)
 
     # Extract C_alpha coordinates
-    list_CA = process.get_ca_coords(pdb_file)
+    list_CA = ppdb.get_ca_coords(pdb_file)
     # Calculate centre of mass
-    center_of_mass = process.get_COM(list_CA)
+    center_of_mass = ppdb.get_com(list_CA)
     print(list_CA)
     print(center_of_mass)
