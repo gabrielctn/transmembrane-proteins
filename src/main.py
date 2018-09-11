@@ -16,10 +16,8 @@ from Bio.PDB import NACCESS
 from Bio.PDB import PDBParser
 from docopt import docopt
 import process_pdb as ppdb
+import sphere
 
-
-
-###############
 
 
 if __name__ == '__main__':
@@ -27,7 +25,7 @@ if __name__ == '__main__':
     arguments = docopt(__doc__, version='Transmembrane Protein Areas 1.0')
     pdb_file = arguments["FILE"]
 
-    # Run NACCESS with the Biopython wrapper
+    # Run NACCESS with Biopython wrapper
     pdb_struct = PDBParser()
     struct = pdb_struct.get_structure(pdb_file[:4].upper(), pdb_file)
     model = struct[0]
@@ -38,7 +36,10 @@ if __name__ == '__main__':
 
     # Extract C_alpha coordinates
     list_CA = ppdb.get_ca_coords(pdb_file)
-    # Calculate centre of mass
+    # Calculate Centre of Mass
     center_of_mass = ppdb.get_com(list_CA)
-    print(list_CA)
-    print(center_of_mass)
+    # print(list_CA)
+    # print(center_of_mass)
+
+    sphere_points = generate_points_on_sphere(center_of_mass, num_points)
+    
