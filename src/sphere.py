@@ -1,3 +1,6 @@
+import numpy as np
+from vector import *
+
 """This module contains all the functions used for the search 
 of the membrane pane. That includes the generation of points 
 evenly distributed at the surface of a sphere, and lines 
@@ -18,29 +21,12 @@ def generate_points_on_sphere(com_coordinates, num_points):
     radius = np.sqrt(1 - fixed_z_axis * fixed_z_axis)
 
     # Generate points centered on the center of mass
-    points = np.zeros((num_points, 3))
+    points = [Vector() for _ in range(num_points)]
+    for i in range(num_points):
+        points[i]
+
     points[:,0] = com_coordinates[0] + radius * np.cos(theta)
     points[:,1] = com_coordinates[1] + radius * np.sin(theta)
     points[:,2] = com_coordinates[2] + fixed_z_axis
     return points
 
-
-def get_vector(com_coordinates, sphere_point):
-    """Returns the vector between the 
-    center of mass to the point on the sphere
-    """
-    return np.substract(sphere_point, com_coordinates)
-
-
-def get_vector_magnitude(vect):
-    """Calculate the magnitude (Euclidian norm) of a vector"""
-    return np.sqrt(vect.dot(vect)) # Faster than np.linalg.norm(x)
-
-
-def get_unit_vector(vect):
-    """Normalize a vector by its magnitude: return the unit vector"""
-    return np.true_divide(vect, get_vector_magnitude(vect))
-
-
-def distance_point_from_plane(point, plane):
-    return (p.A*v.x + p.B * v.y + p.C* v.z + p.D) / np.sqrt(p.A*p.A + p.B*p.B + p.C*p.C) 
