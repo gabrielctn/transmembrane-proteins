@@ -37,10 +37,11 @@ if __name__ == '__main__':
     model = struct[0]
     # Use custom naccess installation path if specified in command line argument
     if arguments["--naccess"] == True:
-        rsa_data, asa_data = NACCESS.run_naccess(model, pdb_file, naccess=arguments["PATH"])
+        rsa_data, asa_data = NACCESS.run_naccess(model, pdb_file,
+                                                 naccess=arguments["PATH"])
     else:
         rsa_data, asa_data = NACCESS.run_naccess(model, pdb_file)
-    # Parse the naccess output .rsa file to retrieve 
+    # Parse the naccess output .rsa file to retrieve
     # the relative % of solvant accessible area for each CA
     naccess_rsa = NACCESS.process_rsa_data(rsa_data)
     # Keep only residues having a relative accessibility > 30 (arbitrary)
@@ -55,10 +56,8 @@ if __name__ == '__main__':
     ### print(center_of_mass)
 
     # Generate 500 points on a hemisphere englobing the protein
-    sphere_points = sphere.generate_points_on_sphere(center_of_mass, 500)
-    #print(sphere_points)
+    sphere_points = sphere.generate_points_on_sphere(center_of_mass, 1000)
     # # Search for nearest point to plane
     #for point in sphere_points:
-        # Create a line passing by the center 
+        # Create a line passing by the center
         # of mass and a point on the hemisphere
-
