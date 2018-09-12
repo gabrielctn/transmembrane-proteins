@@ -3,10 +3,11 @@
 
 
 """Usage:
-    main.py FILE
+    main.py FILE [--naccess PATH]
 
    Options:
-    -h --help   Show this
+    -h --help             Show this
+    -n --naccess  PATH    Absolute path to local naccess binary
 """
 
 
@@ -15,31 +16,49 @@
 from Bio.PDB import NACCESS
 from Bio.PDB import PDBParser
 from docopt import docopt
-import process_pdb as ppdb
+from collections import abc
+import pdb
 import sphere
+import vector
+
+
 
 
 
 if __name__ == '__main__':
     # Parse command line
     arguments = docopt(__doc__, version='Transmembrane Protein Areas 1.0')
+    #print(arguments)
     pdb_file = arguments["FILE"]
 
-    # Run NACCESS with Biopython wrapper
+    # Run NACCESS with the Biopython wrapper
     pdb_struct = PDBParser()
     struct = pdb_struct.get_structure(pdb_file[:4].upper(), pdb_file)
     model = struct[0]
-    # Set the probe_size to 1.0 angstrom to stick to paper's method.
-    rsa_data, asa_data = NACCESS.run_naccess(model, pdb_file, "1")
-    naccess_rel_dict = NACCESS.process_rsa_data(rsa_data)
-    naccess_atom_dict = NACCESS.process_asa_data(asa_data)
+    # Use custom naccess installation path if specified in command line argument
+    if arguments["--naccess"] == True:
+        rsa_data, asa_data = NACCESS.run_naccess(model, pdb_file, naccess=arguments["PATH"])
+    else:
+        rsa_data, asa_data = NACCESS.run_naccess(model, pdb_file)
+    # Parse the naccess output .rsa file to retrieve 
+    # the relative % of solvant accessible area for each CA
+    naccess_rsa = NACCESS.process_rsa_data(rsa_data)
+    # Keep only residues having a relative accessibility > 30 (arbitrary)
+    accessible_residues = pdb.keep_accessible_residues(naccess_rsa)
+    ### print(accessible_residues)
 
-    # Extract C_alpha coordinates
-    list_CA = ppdb.get_ca_coords(pdb_file)
-    # Calculate Centre of Mass
-    center_of_mass = ppdb.get_com(list_CA)
-    # print(list_CA)
-    # print(center_of_mass)
+    # Compile informations on the protein residues
+    prot_dict = pdb.build_prot_dict(pdb_file, accessible_residues)
+    # Centre of Mass
+    center_of_mass = prot_dict['com']
+    ### print(list_CA_coords)
+    ### print(center_of_mass)
 
-    sphere_points = generate_points_on_sphere(center_of_mass, num_points)
-    
+    # Generate 500 points on a hemisphere englobing the protein
+    sphere_points = sphere.generate_points_on_sphere(center_of_mass, 500)
+    #print(sphere_points)
+    # # Search for nearest point to plane
+    #for point in sphere_points:
+        # Create a line passing by the center 
+        # of mass and a point on the hemisphere
+
