@@ -1,14 +1,15 @@
 import numpy as np
 from vector import *
 
-"""This module contains all the functions used for the search 
-of the membrane pane. That includes the generation of points 
-evenly distributed at the surface of a sphere, and lines 
+"""This module contains all the functions used for the search
+of the membrane pane. That includes the generation of points
+evenly distributed at the surface of a sphere, and lines
 passing by the center of mass and these points.
 """
 
+
 def generate_points_on_sphere(com_coordinates, num_points):
-    """Generate *num_points* points evenly distributed on a sphere centered 
+    """Generate *num_points* points evenly distributed on a sphere centered
     on the center of mass of the protein using the Vogel's method
     with the golden angle.
     """
@@ -21,12 +22,8 @@ def generate_points_on_sphere(com_coordinates, num_points):
     radius = np.sqrt(1 - fixed_z_axis * fixed_z_axis)
 
     # Generate points centered on the center of mass
-    points = [Vector() for _ in range(num_points)]
-    for i in range(num_points):
-        points[i]
-
-    points[:,0] = com_coordinates[0] + radius * np.cos(theta)
-    points[:,1] = com_coordinates[1] + radius * np.sin(theta)
-    points[:,2] = com_coordinates[2] + fixed_z_axis
+    points = np.zeros((num_points, 3))
+    points[:, 0] = com_coordinates[0] + radius * np.cos(theta)
+    points[:, 1] = com_coordinates[1] + radius * np.sin(theta)
+    points[:, 2] = com_coordinates[2] + fixed_z_axis
     return points
-
