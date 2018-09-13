@@ -1,17 +1,39 @@
-"""This module contains functions that process PDB files to retrieve
-3D coordinates of alpha carbons and calculate the center of mass of the protein.
-The parsing is made only once to optimize calculations.
+"""
+.. module:: pdb
+   :synopsis: This module contains functions that process PDB files to retrieve
+   3D coordinates of alpha carbons and calculate the center of mass of the protein.
+   The parsing is made only once to optimize calculations.
+
+.. moduleauthor:: Gabriel Cretin M2 BIB
 """
 
 
 def get_com(x, y, z, nb_ca):
-    """Calculate the Center Of Mass from a list of coordinates"""
+    """Calculate the Center Of Mass from a list of coordinates
+
+    Args:
+        x: Cumulative sum of C_alpha's x coordinates
+        y: Cumulative sum of C_alpha's y coordinates
+        z: Cumulative sum of C_alpha's z coordinates
+        nb_ca: number of alpha carbons in the protein
+
+    Returns:
+        tuple: The center of mass of the protein as (x, y, z)
+
+    """
     return (x / nb_ca, y / nb_ca, z / nb_ca)
 
 
 def keep_accessible_residues(naccess_rsa):
     """From the output of naccess we keep only accessible residues
-    which have a all_atoms_rel value > 30 (arbitrary threshold)"""
+    which have a all_atoms_rel value > 30 (arbitrary threshold)
+
+    Args:
+        naccess_rsa: A dictionnary containing the output of naccess's calculations
+
+    Returns:
+        dict: keys are the residue ids and as value their solvant accessible area
+    """
     accessible_residues_dict = {}
     for (chain_id, res_id), data_dict in naccess_rsa.items():
         for key, val in data_dict.items():
@@ -28,13 +50,19 @@ def build_prot_dict(pdb_file, accessible_residues):
             - 3D coordinates of accessible residues
             - value of relative accessibility to solvant
             - residue name
+
+        Args:
+            pdb_file: The protein's PDB file
+            accessible_residues: Dictionnary containing the accessible residues
+                and their relative accessibility value
+
         Returns:
-            prot_dict -> center_of_mass
-                      -> residue_id -> x
-                                    -> y
-                                    -> z
-                                    -> all_atoms_rel_accessibility_value
-                                    -> residue_name
+            dict: prot_dict -> center_of_mass
+                            -> residue_id -> x
+                                          -> y
+                                          -> z
+                                          -> all_atoms_rel_accessibility_value
+                                          -> residue_name
     """
     prot_dict = {}
     nb_ca = 0
@@ -63,5 +91,5 @@ def build_prot_dict(pdb_file, accessible_residues):
                     prot_dict[residue_num] = {'x': x, 'y': y, 'z': z,
                                               'all_atoms_rel': accessible_residues[residue_num],
                                               'resName': residue_name}
-    prot_dict['com'] = get_com(x, y, z, nb_ca)
+    prot_dict['com'] = get_com(x_com, y_com, z_com, nb_ca)
     return prot_dict

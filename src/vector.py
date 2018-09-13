@@ -1,15 +1,28 @@
 import numpy as np
 
-"""This module implements a Vector class and functions associated to
-Vectors (coordinates) manipulation"""
+"""
+.. module:: vector
+   :synopsis: This module implements a Vector class and functions associated to
+   Vectors (coordinates) manipulation
+
+.. moduleauthor:: Gabriel Cretin M2 BIB
+"""
 
 
 class Vector:
-    """This class implements 3D vectors supporting numpy arrays"""
+    """This class implements 3D vectors supporting numpy arrays
+
+    Attributes:
+        x: x coordinate
+        y: y coordinate
+        z: z coordinate
+        coords: Numpy array containing the 3D coordinates
+    """
 
     def __init__(self, x=0, y=0, z=0):
         """ Creates a vector, example: v = Vector(1, 2, 3)
-        with individual coordinates + a numpy array"""
+        with individual coordinates + a numpy array
+        """
         self.x = float(x)
         self.y = float(y)
         self.z = float(z)
