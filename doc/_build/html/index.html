@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; Transmembrane Protein Areas 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> Transmembrane Protein Areas
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Transmembrane Protein Areas</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>&lt;no title&gt;</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-main"></span><dl class="docutils">
+<dt>Usage:</dt>
+<dd>main.py FILE [–naccess PATH] [–points NUM]</dd>
+<dt>Options:</dt>
+<dd><p class="first">-h –help             Show this
+-n –naccess  PATH    Absolute path to local naccess binary
+-p –points   NUM     Number of points to generate on the hemisphere to criss-cross the protein.</p>
+<blockquote class="last">
+<div>A high number will give better results, but longer calculations. [default: 250]</div></blockquote>
+</dd>
+</dl>
+<span class="target" id="module-src.vector"></span><dl class="class">
+<dt id="src.vector.Vector">
+<em class="property">class </em><code class="descclassname">src.vector.</code><code class="descname">Vector</code><span class="sig-paren">(</span><em>x=0</em>, <em>y=0</em>, <em>z=0</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="class">
+<dt id="src.vector.Vector.Vector">
+<em class="property">class </em><code class="descname">Vector</code><a class="headerlink" href="#src.vector.Vector.Vector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This class implements 3D vectors supporting numpy arrays</p>
+<dl class="attribute">
+<dt id="src.vector.Vector.x">
+<code class="descname">x</code><a class="headerlink" href="#src.vector.Vector.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>x coordinate</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="src.vector.Vector.y">
+<code class="descname">y</code><a class="headerlink" href="#src.vector.Vector.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>y coordinate</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="src.vector.Vector.z">
+<code class="descname">z</code><a class="headerlink" href="#src.vector.Vector.z" title="Permalink to this definition">¶</a></dt>
+<dd><p>z coordinate</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="src.vector.Vector.coords">
+<code class="descname">coords</code><a class="headerlink" href="#src.vector.Vector.coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numpy array containing the 3D coordinates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.vector.Vector.__add__">
+<code class="descname">__add__</code><span class="sig-paren">(</span><em>operand</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Addition</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.vector.Vector.__div__">
+<code class="descname">__div__</code><span class="sig-paren">(</span><em>scalar</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__div__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Division</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.vector.Vector.__mul__">
+<code class="descname">__mul__</code><span class="sig-paren">(</span><em>scalar</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scalar Multiplication</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.vector.Vector.__neg__">
+<code class="descname">__neg__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__neg__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.vector.Vector.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>String representation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.vector.Vector.__sub__">
+<code class="descname">__sub__</code><span class="sig-paren">(</span><em>operand</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subtraction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.vector.Vector.distance_to_plane">
+<code class="descname">distance_to_plane</code><span class="sig-paren">(</span><em>normal</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.distance_to_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the distance between a 3D point and a plane</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>normal</strong> – the normal vector of the plane</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.vector.Vector.norm">
+<code class="descname">norm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the norm (length, magnitude) of a vector</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.vector.Vector.unit">
+<code class="descname">unit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize a vector by its magnitude: returns the unit vector</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.vector.Vector.vector_to">
+<code class="descname">vector_to</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.vector_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the vector between self and the point given in argument</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-src.sphere"></span><dl class="function">
+<dt id="src.sphere.generate_points_on_sphere">
+<code class="descclassname">src.sphere.</code><code class="descname">generate_points_on_sphere</code><span class="sig-paren">(</span><em>com_coordinates</em>, <em>num_points</em><span class="sig-paren">)</span><a class="headerlink" href="#src.sphere.generate_points_on_sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate <em>num_points</em> points evenly distributed on a hemisphere,
+centered on the center of mass of the protein thanks to the
+golden angle 3 - sqrt(5).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>com_coordinates</strong> – Coordinates of the center of mass of the protein</li>
+<li><strong>num_points</strong> – Number of desired points on the hemisphere</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Numpy array of n 3D cartesian coordinates
+centered on the center of mass of the protein</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="module-src.pdb"></span><dl class="function">
+<dt id="src.pdb.build_prot_dict">
+<code class="descclassname">src.pdb.</code><code class="descname">build_prot_dict</code><span class="sig-paren">(</span><em>pdb_file</em>, <em>accessible_residues</em><span class="sig-paren">)</span><a class="headerlink" href="#src.pdb.build_prot_dict" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>Get the coordinates of alpha carbones in the PDB</li>
+<li>Check if the residue is accessible to solvant</li>
+<li><dl class="first docutils">
+<dt>Builds a dictionnary compiling infos on:</dt>
+<dd><ul class="first last">
+<li>3D coordinates of accessible residues</li>
+<li>value of relative accessibility to solvant</li>
+<li>residue name</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>pdb_file: The protein’s PDB file
+accessible_residues: Dictionnary containing the accessible residues and their relative accessibility value</dd>
+<dt>Returns:</dt>
+<dd><dl class="first docutils">
+<dt>dict: prot_dict -&gt; residue_id -&gt; x</dt>
+<dd>-&gt; y
+-&gt; z
+-&gt; all_atoms_rel_accessibility_value
+-&gt; residue_name</dd>
+</dl>
+<p class="last">Vector: Protein’s center_of_mass</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.pdb.get_com">
+<code class="descclassname">src.pdb.</code><code class="descname">get_com</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>nb_ca</em><span class="sig-paren">)</span><a class="headerlink" href="#src.pdb.get_com" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Center Of Mass from a list of coordinates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> – Cumulative sum of C_alpha’s x coordinates</li>
+<li><strong>y</strong> – Cumulative sum of C_alpha’s y coordinates</li>
+<li><strong>z</strong> – Cumulative sum of C_alpha’s z coordinates</li>
+<li><strong>nb_ca</strong> – number of alpha carbons in the protein</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The center of mass of the protein as (x, y, z)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.pdb.keep_accessible_residues">
+<code class="descclassname">src.pdb.</code><code class="descname">keep_accessible_residues</code><span class="sig-paren">(</span><em>naccess_rsa</em><span class="sig-paren">)</span><a class="headerlink" href="#src.pdb.keep_accessible_residues" title="Permalink to this definition">¶</a></dt>
+<dd><p>From the output of naccess we keep only accessible residues
+which have a all_atoms_rel value &gt; 30 (arbitrary threshold)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>naccess_rsa</strong> – A dictionnary containing the output of naccess’s calculations</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">keys are the residue ids and as value their solvant accessible area</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gabriel Cretin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

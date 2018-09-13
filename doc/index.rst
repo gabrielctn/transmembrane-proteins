@@ -8,8 +8,6 @@
    :maxdepth: 2
    :caption: Contents:
 
-
-
 .. automodule:: main
    :members:
 
@@ -18,15 +16,6 @@
 
 .. automodule:: src.sphere
    :members:
-   
+
 .. automodule:: src.pdb
    :members:
-
-Indices and tables
-==================
- 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
- 

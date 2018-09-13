@@ -2,14 +2,15 @@
 # -*- coding: utf-8 -*-
 
 
-"""Usage:
-    main.py FILE [--naccess PATH] [--points NUM]
+"""
+    Usage:
+        main.py FILE [--naccess PATH] [--points NUM]
 
-   Options:
-    -h --help             Show this
-    -n --naccess  PATH    Absolute path to local naccess binary
-    -p --points   NUM     Number of points to generate on the hemisphere to criss-cross the protein.
-                          A high number will give better results, but longer calculations. [default: 250]
+    Options:
+        -h --help             Show this
+        -n --naccess  PATH    Absolute path to local naccess binary
+        -p --points   NUM     Number of points to generate on the hemisphere to criss-cross the protein.
+                                A high number will give better results, but longer calculations. [default: 250]
 """
 
 
@@ -32,7 +33,7 @@ if __name__ == '__main__':
     arguments = docopt(__doc__, version='Transmembrane Protein Areas 1.0')
     ###
     ###TODO: check_args(arguments)
-    ### 
+    ###
 
 
     print(arguments)
@@ -76,4 +77,3 @@ if __name__ == '__main__':
             ca_plane_distance = infos['3Dcoords'].distance_to_plane(plane_normal)
             print("Normale du plan: ", plane_normal)
             print("Distance: ", ca_plane_distance)
-

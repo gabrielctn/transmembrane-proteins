@@ -11,7 +11,9 @@ from numbers import Number
 
 
 class Vector:
-    """This class implements 3D vectors supporting numpy arrays
+    """
+    .. class:: Vector
+    This class implements 3D vectors supporting numpy arrays
 
     Attributes:
         x: x coordinate
@@ -45,7 +47,7 @@ class Vector:
 
     def distance_to_plane(self, normal):
         """Calculates the distance between a 3D point and a plane
-        
+
         Args:
             normal: the normal vector of the plane
         """
@@ -57,7 +59,7 @@ class Vector:
                                      normal.z * self.z +
                                      d), np.sqrt(normal.x ** 2 +
                                                  normal.y ** 2 +
-                                                 normal.z ** 2))   
+                                                 normal.z ** 2))
 
     def create_line_between(self, dest_point):
         pass
