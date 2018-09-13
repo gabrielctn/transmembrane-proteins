@@ -1,3 +1,6 @@
+from src.vector import *
+
+
 """
 .. module:: pdb
    :synopsis: This module contains functions that process PDB files to retrieve
@@ -21,7 +24,7 @@ def get_com(x, y, z, nb_ca):
         tuple: The center of mass of the protein as (x, y, z)
 
     """
-    return (x / nb_ca, y / nb_ca, z / nb_ca)
+    return Vector(x / nb_ca, y / nb_ca, z / nb_ca)
 
 
 def keep_accessible_residues(naccess_rsa):
@@ -43,26 +46,25 @@ def keep_accessible_residues(naccess_rsa):
 
 
 def build_prot_dict(pdb_file, accessible_residues):
-    """1) Get the coordinates of alpha carbones in the PDB
-       2) Check if the residue is accessible to solvant
-       3) Builds a dictionnary compiling infos on:
-            - Center of mass of the protein (tuple)
+    """1. Get the coordinates of alpha carbones in the PDB
+       2. Check if the residue is accessible to solvant
+       3. Builds a dictionnary compiling infos on:
             - 3D coordinates of accessible residues
             - value of relative accessibility to solvant
             - residue name
 
         Args:
             pdb_file: The protein's PDB file
-            accessible_residues: Dictionnary containing the accessible residues
-                and their relative accessibility value
+            accessible_residues: Dictionnary containing the accessible residues and their relative accessibility value
 
         Returns:
-            dict: prot_dict -> center_of_mass
-                            -> residue_id -> x
+            dict: prot_dict -> residue_id -> x
                                           -> y
                                           -> z
                                           -> all_atoms_rel_accessibility_value
                                           -> residue_name
+            Vector: Protein's center_of_mass
+
     """
     prot_dict = {}
     nb_ca = 0
@@ -88,8 +90,7 @@ def build_prot_dict(pdb_file, accessible_residues):
                 # Keep the residue if it is accessible to solvant
                 # Build a dictionnary compiling all infos for the residue
                 if residue_num in accessible_residues:
-                    prot_dict[residue_num] = {'x': x, 'y': y, 'z': z,
+                    prot_dict[residue_num] = {'3Dcoords': Vector(x, y, z),
                                               'all_atoms_rel': accessible_residues[residue_num],
                                               'resName': residue_name}
-    prot_dict['com'] = get_com(x_com, y_com, z_com, nb_ca)
-    return prot_dict
+    return (prot_dict, get_com(x_com, y_com, z_com, nb_ca))
