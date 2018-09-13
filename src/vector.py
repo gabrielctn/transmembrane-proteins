@@ -1,4 +1,5 @@
 import numpy as np
+from numbers import Number
 
 """
 .. module:: vector
@@ -38,33 +39,38 @@ class Vector:
 
     def vector_to(self, point):
         """Returns the vector between self and the point given in argument"""
-        return self.coords.substract(point.coords)
+        if isinstance(point, Vector):
+            return point.coords - self.coords
+        return point - self.coords
 
     def distance_to_plane(self, normal):
-        """Returns the distance between a point and a plane, knowing its normal vector"""
-        assert isinstance(
-            normal, Vector), "Error 2: a normal vector must be of type Vector"
+        """Calculates the distance between a 3D point and a plane
+        
+        Args:
+            normal: the normal vector of the plane
+        """
         # a plane is a*x+b*y+c*z+d=0
         # [a,b,c] is the normal. Thus, we have to calculate d
-        d = -self.coords.dot(normal.coords)
+        d = -(normal.norm()**2)
         return np.true_divide(np.abs(normal.x * self.x +
                                      normal.y * self.y +
                                      normal.z * self.z +
                                      d), np.sqrt(normal.x ** 2 +
                                                  normal.y ** 2 +
-                                                 normal.z ** 2))
+                                                 normal.z ** 2))   
 
-    # def create_line():
+    def create_line_between(self, dest_point):
+        pass
 
-    # def create_far_plane():
+
+    def create_far_plane(com, norm, ):
+        pass
+
+
 
     def __str__(self):
         """String representation"""
-        return "<%s, %s, %s>".format(self.x, self.y, self.z)
-
-    def __copy(self):
-        """Produce a copy of itself"""
-        return Vector(self.x, self.y, self.z)
+        return "<{}, {}, {}>".format(self.x, self.y, self.z)
 
     def __neg__(self):
         """Signing"""
@@ -72,7 +78,9 @@ class Vector:
 
     def __mul__(self, scalar):
         """Scalar Multiplication"""
-        return Vector(self.x * scalar, self.y * scalar, self.z * scalar)
+        return Vector(self.x * scalar,
+                      self.y * scalar,
+                      self.z * scalar)
 
     def __div__(self, scalar):
         """Division"""
@@ -80,8 +88,29 @@ class Vector:
 
     def __add__(self, operand):
         """Addition"""
-        return Vector(self.x + operand.x, self.y + operand.y, self.z + operand.z)
+        return Vector(self.x + operand.x,
+                      self.y + operand.y,
+                      self.z + operand.z)
 
     def __sub__(self, operand):
-        """Substraction"""
+        """Subtraction"""
         return self.__copy() + -operand
+
+    def __getitem__(self, index):
+        if isinstance(index, int):
+            return self.coords[index]
+        # slicing
+        elif isinstance(index, type(slice(1))):
+            return self.coords.__getitem__(index)
+        else:
+            raise KeyError
+
+    def __setitem__(self, key, value):
+        if not isinstance(value, numbers.Number):
+            raise ValueError
+        if (key == 0):
+            self.x = value
+        elif (key == 1):
+            self.y = value
+        elif (key == 2):
+            self.z = value
