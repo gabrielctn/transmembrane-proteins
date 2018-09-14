@@ -10,7 +10,7 @@ from src.vector import *
 """
 
 
-def generate_points_on_sphere(com_coordinates, num_points):
+def generate_points_on_sphere(num_points):
     """Generate *num_points* points evenly distributed on a hemisphere,
     centered on the center of mass of the protein thanks to the
     golden angle 3 - sqrt(5).
@@ -20,7 +20,7 @@ def generate_points_on_sphere(com_coordinates, num_points):
         num_points: Number of desired points on the hemisphere
 
     Returns:
-        A Numpy array of n 3D cartesian coordinates 
+        A Numpy array of n 3D cartesian coordinates
         centered on the center of mass of the protein
     """
     # Generate n indices on an evenly distributed interval
