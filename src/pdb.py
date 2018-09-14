@@ -99,3 +99,13 @@ def scale_ca_coords(prot_dict, center_of_mass):
     for c_alpha, infos in prot_dict.items():
         infos['3Dcoords'] = infos['3Dcoords'] - center_of_mass
     return prot_dict
+
+
+def relative_hydrophobicity(residues, nb_tot_residues):
+    """Calculates the relative hydrophobicity of a list of residues
+
+        Returns:
+            float: Relative hydrophobicity = hydrophobe residues / total residues
+    """
+    hydrophobes = ["PHE", "ILE", "GLY", "LEU", "MET", "TRP", "TYR", "VAL"]
+    return len(set(residues).intersection(hydrophobes)) / nb_tot_residues
