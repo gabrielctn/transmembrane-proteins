@@ -30,11 +30,10 @@ def generate_points_on_sphere(com_coordinates, num_points):
     phi = np.arccos(1 - indices / num_points)
     theta = golden_angle * indices
 
-    # Translate the spherical coordinates to cartesian 3D (x, y, z)
-    # Center the hemisphere to the center of mass of the protein
-    # The radius of the hemisphere is 1.
-    points = np.zeros((num_points, 3))
-    points[:, 0] = com_coordinates.x + np.cos(theta) * np.sin(phi)
-    points[:, 1] = com_coordinates.y + np.sin(theta) * np.sin(phi)
-    points[:, 2] = com_coordinates.z + np.cos(phi)
+    # Translate the spherical coordinates to cartesian 3D coordinates (x, y, z)
+    # Set the radius to 100 angstroms to englobe most of proteins
+    points = np.full((num_points, 3), 100.0)
+    points[:, 0] += np.cos(theta) * np.sin(phi)
+    points[:, 1] += np.sin(theta) * np.sin(phi)
+    points[:, 2] += np.cos(phi)
     return points
