@@ -18,7 +18,7 @@ def get_com(x, y, z, nb_ca):
         x: Cumulative sum of C_alpha's x coordinates
         y: Cumulative sum of C_alpha's y coordinates
         z: Cumulative sum of C_alpha's z coordinates
-        nb_ca: number of alpha carbons in the protein
+        nb_ca: Number of alpha carbons in the protein
 
     Returns:
         tuple: The center of mass of the protein as (x, y, z)
@@ -35,7 +35,7 @@ def keep_accessible_residues(naccess_rsa):
         naccess_rsa: A dictionnary containing the output of naccess's calculations
 
     Returns:
-        dict: keys are the residue ids and as value their solvant accessible area
+        dict: Keys are the residue ids and as value their solvant accessible area
     """
     accessible_residues_dict = {}
     for (chain_id, res_id), data_dict in naccess_rsa.items():
@@ -58,12 +58,10 @@ def build_prot_dict(pdb_file, accessible_residues):
             accessible_residues: Dictionnary containing the accessible residues and their relative accessibility value
 
         Returns:
-            dict: prot_dict -> residue_id -> x
-                                          -> y
-                                          -> z
+            - dict: prot_dict -> residue_id -> Vector(x, y, z)
                                           -> all_atoms_rel_accessibility_value
                                           -> residue_name
-            Vector: Protein's center_of_mass
+            - Vector: Protein's center_of_mass
 
     """
     prot_dict = {}
