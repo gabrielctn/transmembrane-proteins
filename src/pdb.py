@@ -92,3 +92,10 @@ def build_prot_dict(pdb_file, accessible_residues):
                                               'all_atoms_rel': accessible_residues[residue_num],
                                               'resName': residue_name}
     return (prot_dict, get_com(x_com, y_com, z_com, nb_ca))
+
+
+def scale_ca_coords(prot_dict, center_of_mass):
+    """Place the cartesian system centered in (0, 0, 0) origin"""
+    for c_alpha, infos in prot_dict.items():
+        infos['3Dcoords'] = infos['3Dcoords'] - center_of_mass
+    return prot_dict
