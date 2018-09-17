@@ -9,6 +9,7 @@
 
 from src.vector import *
 from operator import itemgetter
+import sys
 
 
 
@@ -39,7 +40,7 @@ def keep_accessible_residues(naccess_rsa):
     accessible_residues_dict = {}
     for (chain_id, res_id), data_dict in naccess_rsa.items():
         for key, val in data_dict.items():
-            if key == "all_atoms_rel" and val >= 20:
+            if key == "all_atoms_rel" and val >= 30:
                 accessible_residues_dict[res_id[1]] = val
     return accessible_residues_dict
 
@@ -113,82 +114,28 @@ def slice_relative_hydrophobicity(residues, nb_residues_in_slice):
 
     """
     hydrophobes = ["PHE", "ILE", "GLY", "LEU", "MET", "TRP", "TYR", "VAL"]
-    rel_hydro = len(set(residues).intersection(hydrophobes)) / nb_residues_in_slice
+    try:
+        rel_hydro = len(set(residues).intersection(hydrophobes)) / nb_residues_in_slice
+    except ZeroDivisionError as err:
+        sys.exit("It seems like there is no residues in the slice: " + str(err))
     assert isinstance(rel_hydro, (float, int)) == True, "Error 3: rel_hydro should be an int or a float."
     return rel_hydro
 
 
-def get_best_line(processed_lines):
-    """Finds the line with the highest average hydrophobicity value
+
+def max_sub_array_sum(array):
+    """Implementation of the Kadane's algorithm to solve the maximum sub-array
+    problem in O(n) time and O(1) space. It finds the maximum contiguous subarray
+    and print its starting and end index. Here it will return the indexes of the
+    slices between which there is the maximum hydrophobicity: the area of the membrane !
 
         Args:
-            processed_lines: A list containing lines (dictionaries) with their
-                                respective normal vector and values of average
-                                hydrophobicity
+            array: Numpy array containing the relative hydrophobicity of all
+                    the slices of the best line
+
         Returns:
-            tuple: (plane_normal, average_hydrophobicity)
+            tuple: (a, b, c) such that sum(array[a:b]) == c and c is maximal
     """
-    tuples = []
-    # The result of parallelization returns a nested list,
-    # which explains the double for loop
-    for index in processed_lines:
-        for line in index:
-            tuples.append(line["line_average_hydro"])
-    return max(tuples, key=itemgetter(1))
-
-
-def get_best_slice(processed_lines):
-    """This function finds the slice maximizing the hydrophobicity of the
-    accessible residues inside"""
-    best_slices = None
-    for index in processed_lines:
-        for line in index:
-            print("coucou")
-    return processed_lines
-    #         if best_line == line["line_average_hydro"]:
-    #             best_slices = line["slice_hydro"]
-    # # Get the index of the maximal hydrophobicity value among all slices
-    # index_max = np.argmax(best_slices)
-    # print("Best slices: \n", best_slices)
-    # print("Index, value of best slice: ", index_max, best_slices[index_max])
-
-
-
-
-def maxSubArraySum(array, size):
-    """Function to find the maximum contiguous subarray
-    and print its starting and end index"""
-    max_so_far = -maxsize - 1
-    max_ending_here = 0
-    start = 0
-    end = 0
-    s = 0
-
-    for i in range(0,size):
-        max_ending_here += array[i]
-
-        if max_so_far < max_ending_here:
-            max_so_far = max_ending_here
-            start = s
-            end = i
-
-        if max_ending_here < 0:
-            max_ending_here = 0
-            s = i+1
-
-    print ("Maximum contiguous sum is %d"%(max_so_far))
-    print ("Starting Index %d"%(start))
-    print ("Ending Index %d"%(end))
-
-
-
-
-def max_sub_array_sum(list):
-    """Implementation of the Kadane's algorithm to solve the maximum sub-array problem
-    in O(n) time and O(1) space
-
-    Returns:
-        tuple: (a, b, c) such that sum(list[a:b]) == c and c is maximal"""
     best = current = 0
     current_index = start_index = best_index = 0
     for index, val in enumerate(array):
@@ -198,13 +145,98 @@ def max_sub_array_sum(list):
             current, current_index = 0, index + 1
         if current > best:
             start_index, best_index, best = current_index, index + 1, current
-    return start_index, best_index, best
+    return (start_index, best_index, best)
 
 
 
+def get_best_results(processed_lines):
+    """Parse the results of the parallelization.
+    Finds the line with the highest average hydrophobicity value and determines
+    the range of slices maximizing the accessible residues hydrophobicity,
+    which will point to the famous transmembrane area !
 
-# best = cur = 0
-#     for i in l:
-#         cur = max(cur + i, 0)
-#         best = max(best, cur)
-#     return best
+        Args:
+            processed_lines: A list containing lines (dictionaries) with their
+                                respective slices infos and values of average
+                                hydrophobicity
+        Returns:
+            list: [(plane_normal, average_hydrophobicity), start_index,
+                    best_index, best, nb_steps, shortest_distance]
+    """
+    lines = []
+    best_slices = None
+    nb_steps = None
+    shortest_distance = None
+    # The result of the parallelization is an ImapIterator,
+    # which explains the necessity of doing the double for loop.
+    for index in processed_lines:
+        for line in index:
+            lines.append(line)
+    # Get the best line
+    best_line = max([line["line_average_hydro"] for line in lines], key=itemgetter(1))
+    # Get the slices of the best line
+    for line in lines:
+        if line["line_average_hydro"] == best_line:
+            best_slices = line["slice_hydro"]
+            nb_steps = line["nb_steps"]
+            shortest_distance = line["shortest_distance"]
+    # Get the indexes of the slices between which there is the maximum hydrophobicity
+    start_index, best_index, best = max_sub_array_sum(best_slices)
+    return [best_line, start_index, best_index, best, nb_steps, shortest_distance]
+
+
+def generate_membranes(processed_lines, best_results, resolution):
+    """Generate points in the space to simulate the membranes.
+    They will be represented in PyMol at the end as 2 planes like both membranes.
+
+        Args:
+            processed_lines: A list containing lines (dictionaries) with their
+                                respective slices infos and values of average
+                                hydrophobicity
+            best_results: A list [(plane_normal, average_hydrophobicity),
+                                    start_index, best_index, best, nb_steps,
+                                    shortest_distance]
+        Returns:
+            tuple: points_membrane_1, points_membrane_2
+    """
+    # Retrieve the results
+    plane_normal = best_results[0][0]
+    shortest_distance = best_results[5]
+    nb_steps = best_results[4]
+    start_index = best_results[1]
+    best_index = best_results[2]
+
+    # Distance of membrane 1 to best plane
+    dist_m1 = resolution * (start_index + 1)
+    # Distance of membrane 2 to best plane
+    dist_m2 = resolution * (best_index + 1)
+
+    plane_normal = np.array([plane_normal.x, plane_normal.y, plane_normal.z])
+
+    # We generate 2 * 500 dummy points simulating the membranes
+    point1  = np.array([plane_normal[0] + shortest_distance + dist_m1, plane_normal[1] + shortest_distance + dist_m1, plane_normal[2] + shortest_distance + dist_m1])
+    point2  = np.array([plane_normal[0] + shortest_distance + dist_m2, plane_normal[1] + shortest_distance + dist_m2, plane_normal[2] + shortest_distance + dist_m2])
+
+    # a plane is a*x+b*y+c*z+d=0
+    # [a,b,c] is the plane_normal. Thus, we have to calculate
+    # d and we're set
+    d1 = -point1.dot(plane_normal)
+    d2 = -point2.dot(plane_normal)
+
+    # create x,y
+    X, Y = np.meshgrid(range(20), range(20))
+    positions = np.vstack([X.ravel(), Y.ravel()])
+
+    # calculate corresponding z
+    z1 = (-plane_normal[0] * positions[1] - plane_normal[1] * positions[0] - d1) * 1. / plane_normal[2]
+    z2 = (-plane_normal[0] * positions[1] - plane_normal[1] * positions[0] - d2) * 1. / plane_normal[2]
+
+    points_membrane_1 = points_membrane_2 = np.zeros((400, 3))
+    points_membrane_1[:, 0] = positions[1]
+    points_membrane_1[:, 1] = positions[0]
+    points_membrane_1[:, 2] = z1
+    points_membrane_2[:, 0] = positions[1]
+    points_membrane_2[:, 1] = positions[0]
+    points_membrane_2[:, 2] = z2
+
+    return points_membrane_1, points_membrane_2
