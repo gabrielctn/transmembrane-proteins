@@ -1,13 +1,13 @@
-import numpy as np
-from src.vector import *
-
 """
 .. module:: sphere
-   :synopsis: This module contains the function that generates of points
-   evenly distributed at the surface of a hemisphere.
+  :synopsis: This module contains the function that generates of points
+                evenly distributed at the surface of a hemisphere.
 
 .. moduleauthor:: Gabriel Cretin M2 BIB
 """
+
+import numpy as np
+from src.vector import *
 
 
 def generate_points_on_sphere(num_points):
@@ -32,8 +32,8 @@ def generate_points_on_sphere(num_points):
 
     # Translate the spherical coordinates to cartesian 3D coordinates (x, y, z)
     # Set the radius to 100 angstroms to englobe most of proteins
-    points = np.full((num_points, 3), 100.0)
-    points[:, 0] += np.cos(theta) * np.sin(phi)
-    points[:, 1] += np.sin(theta) * np.sin(phi)
-    points[:, 2] += np.cos(phi)
+    points = np.zeros((num_points, 3))
+    points[:, 0] = np.cos(theta) * np.sin(phi)
+    points[:, 1] = np.sin(theta) * np.sin(phi)
+    points[:, 2] = np.cos(phi)
     return points
