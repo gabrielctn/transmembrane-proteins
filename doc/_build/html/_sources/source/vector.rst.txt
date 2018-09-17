@@ -1,0 +1,12 @@
+Vector module
+=====================
+
+.. automodule:: vector
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: vector
+   :members:
+   :undoc-members:
+   :show-inheritance:

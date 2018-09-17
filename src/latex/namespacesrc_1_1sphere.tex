@@ -1,0 +1,38 @@
+\hypertarget{namespacesrc_1_1sphere}{}\section{src.\+sphere Namespace Reference}
+\label{namespacesrc_1_1sphere}\index{src.\+sphere@{src.\+sphere}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacesrc_1_1sphere_a615d86272d2868fff225fe6c5354c129}{generate\+\_\+points\+\_\+on\+\_\+sphere} (num\+\_\+points)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}.. module:: sphere
+   :synopsis: This module contains the function that generates of points
+   evenly distributed at the surface of a hemisphere.
+
+.. moduleauthor:: Gabriel Cretin M2 BIB
+\end{DoxyVerb}
+ 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacesrc_1_1sphere_a615d86272d2868fff225fe6c5354c129}\label{namespacesrc_1_1sphere_a615d86272d2868fff225fe6c5354c129}} 
+\index{src\+::sphere@{src\+::sphere}!generate\+\_\+points\+\_\+on\+\_\+sphere@{generate\+\_\+points\+\_\+on\+\_\+sphere}}
+\index{generate\+\_\+points\+\_\+on\+\_\+sphere@{generate\+\_\+points\+\_\+on\+\_\+sphere}!src\+::sphere@{src\+::sphere}}
+\subsubsection{\texorpdfstring{generate\+\_\+points\+\_\+on\+\_\+sphere()}{generate\_points\_on\_sphere()}}
+{\footnotesize\ttfamily def src.\+sphere.\+generate\+\_\+points\+\_\+on\+\_\+sphere (\begin{DoxyParamCaption}\item[{}]{num\+\_\+points }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate *num_points* points evenly distributed on a hemisphere,
+centered on the center of mass of the protein thanks to the
+golden angle 3 - sqrt(5).
+
+Args:
+    com_coordinates: Coordinates of the center of mass of the protein
+    num_points: Number of desired points on the hemisphere
+
+Returns:
+    A Numpy array of n 3D cartesian coordinates
+    centered on the center of mass of the protein
+\end{DoxyVerb}
+ 

@@ -1,0 +1,46 @@
+src package
+===========
+
+Submodules
+----------
+
+src.pdb module
+--------------
+
+.. automodule:: src.pdb
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+src.protein module
+------------------
+
+.. automodule:: src.protein
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+src.sphere module
+-----------------
+
+.. automodule:: src.sphere
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+src.vector module
+-----------------
+
+.. automodule:: src.vector
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: src
+    :members:
+    :undoc-members:
+    :show-inheritance:

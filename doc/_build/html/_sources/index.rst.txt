@@ -14,8 +14,11 @@
 .. automodule:: src.vector
    :members:
 
+.. autoclass:: src.vector.Vector
+   :members:
+
 .. automodule:: src.sphere
    :members:
 
-.. automodule:: src.pdb
+.. automodule:: src.protein
    :members:

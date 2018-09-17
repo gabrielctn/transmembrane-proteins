@@ -145,14 +145,14 @@
 <div class="genindex-jumpbox">
  <a href="#_"><strong>_</strong></a>
  | <a href="#B"><strong>B</strong></a>
- | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
+ | <a href="#P"><strong>P</strong></a>
  | <a href="#S"><strong>S</strong></a>
- | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#X"><strong>X</strong></a>
  | <a href="#Y"><strong>Y</strong></a>
@@ -162,19 +162,25 @@
 <h2 id="_">_</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector.__add__">__add__() (src.vector.Vector method)</a>
+      <li><a href="index.html#src.vector.Vector.__add__">__add__() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.__add__">[1]</a>
 </li>
-      <li><a href="index.html#src.vector.Vector.__div__">__div__() (src.vector.Vector method)</a>
+      <li><a href="index.html#src.vector.Vector.__mul__">__mul__() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.__mul__">[1]</a>
 </li>
-      <li><a href="index.html#src.vector.Vector.__mul__">__mul__() (src.vector.Vector method)</a>
+      <li><a href="index.html#src.vector.Vector.__neg__">__neg__() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.__neg__">[1]</a>
+</li>
+      <li><a href="index.html#src.vector.Vector.__radd__">__radd__() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.__radd__">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector.__neg__">__neg__() (src.vector.Vector method)</a>
+      <li><a href="index.html#src.vector.Vector.__rmul__">__rmul__() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.__rmul__">[1]</a>
 </li>
-      <li><a href="index.html#src.vector.Vector.__str__">__str__() (src.vector.Vector method)</a>
+      <li><a href="index.html#src.vector.Vector.__rsub__">__rsub__() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.__rsub__">[1]</a>
 </li>
-      <li><a href="index.html#src.vector.Vector.__sub__">__sub__() (src.vector.Vector method)</a>
+      <li><a href="index.html#src.vector.Vector.__rtruediv__">__rtruediv__() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.__rtruediv__">[1]</a>
+</li>
+      <li><a href="index.html#src.vector.Vector.__sub__">__sub__() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.__sub__">[1]</a>
+</li>
+      <li><a href="index.html#src.vector.Vector.__truediv__">__truediv__() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.__truediv__">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -182,15 +188,7 @@
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.pdb.build_prot_dict">build_prot_dict() (in module src.pdb)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="C">C</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector.coords">coords (src.vector.Vector attribute)</a>
+      <li><a href="index.html#src.protein.build_prot_dict">build_prot_dict() (in module src.protein)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -198,7 +196,7 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector.distance_to_plane">distance_to_plane() (src.vector.Vector method)</a>
+      <li><a href="index.html#src.vector.Vector.dist_to_plane">dist_to_plane() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.dist_to_plane">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -210,7 +208,9 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.pdb.get_com">get_com() (in module src.pdb)</a>
+      <li><a href="index.html#src.protein.get_best_line">get_best_line() (in module src.protein)</a>
+</li>
+      <li><a href="index.html#src.protein.get_com">get_com() (in module src.protein)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -218,7 +218,15 @@
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.pdb.keep_accessible_residues">keep_accessible_residues() (in module src.pdb)</a>
+      <li><a href="index.html#src.protein.keep_accessible_residues">keep_accessible_residues() (in module src.protein)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#main.loop">loop() (in module main)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -234,7 +242,19 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector.norm">norm() (src.vector.Vector method)</a>
+      <li><a href="index.html#src.vector.Vector.norm">norm() (src.vector.Vector method)</a>, <a href="index.html#src.vector.Vector.norm">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#main.process_slices_of_line">process_slices_of_line() (in module main)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#module-protein">protein (module)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -242,10 +262,16 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#module-src.pdb">src.pdb (module)</a>
+      <li><a href="index.html#src.protein.scale_ca_coords">scale_ca_coords() (in module src.protein)</a>
+</li>
+      <li><a href="index.html#src.protein.slice_relative_hydrophobicity">slice_relative_hydrophobicity() (in module src.protein)</a>
+</li>
+      <li><a href="index.html#module-sphere">sphere (module)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="index.html#module-src.protein">src.protein (module)</a>
+</li>
       <li><a href="index.html#module-src.sphere">src.sphere (module)</a>
 </li>
       <li><a href="index.html#module-src.vector">src.vector (module)</a>
@@ -253,24 +279,16 @@
   </ul></td>
 </tr></table>
 
-<h2 id="U">U</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector.unit">unit() (src.vector.Vector method)</a>
-</li>
-  </ul></td>
-</tr></table>
-
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector">Vector (class in src.vector)</a>
+      <li><a href="index.html#src.vector.Vector">Vector (class in src.vector)</a>, <a href="index.html#src.vector.Vector">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector.Vector">Vector.Vector (class in src.vector)</a>
+      <li><a href="index.html#module-vector">vector (module)</a>
 </li>
-      <li><a href="index.html#src.vector.Vector.vector_to">vector_to() (src.vector.Vector method)</a>
+      <li><a href="index.html#src.vector.Vector.Vector">Vector.Vector (class in src.vector)</a>, <a href="index.html#src.vector.Vector.Vector">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -278,7 +296,7 @@
 <h2 id="X">X</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector.x">x (src.vector.Vector attribute)</a>
+      <li><a href="index.html#src.vector.Vector.x">x (src.vector.Vector attribute)</a>, <a href="index.html#src.vector.Vector.x">[1]</a>, <a href="index.html#src.vector.Vector.x">[2]</a>, <a href="index.html#src.vector.Vector.x">[3]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -286,7 +304,7 @@
 <h2 id="Y">Y</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector.y">y (src.vector.Vector attribute)</a>
+      <li><a href="index.html#src.vector.Vector.y">y (src.vector.Vector attribute)</a>, <a href="index.html#src.vector.Vector.y">[1]</a>, <a href="index.html#src.vector.Vector.y">[2]</a>, <a href="index.html#src.vector.Vector.y">[3]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -294,7 +312,7 @@
 <h2 id="Z">Z</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="index.html#src.vector.Vector.z">z (src.vector.Vector attribute)</a>
+      <li><a href="index.html#src.vector.Vector.z">z (src.vector.Vector attribute)</a>, <a href="index.html#src.vector.Vector.z">[1]</a>, <a href="index.html#src.vector.Vector.z">[2]</a>, <a href="index.html#src.vector.Vector.z">[3]</a>
 </li>
   </ul></td>
 </tr></table>

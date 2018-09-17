@@ -14,7 +14,7 @@
 
 import os
 import sys
-sys.path.append(os.path.abspath('../transmembrane-protein'))
+sys.path.append(os.path.abspath('../'))
 
 
 # -- Project information -----------------------------------------------------
@@ -42,7 +42,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.coverage',
     'sphinx.ext.imgmath',
-    'sphinx.ext.napoleon'
+    'sphinx.ext.napoleon',
+    'sphinx.ext.imgmath'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -160,6 +161,7 @@ texinfo_documents = [
 
 
 # -- Extension configuration -------------------------------------------------
+
 # Napoleon settings
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
