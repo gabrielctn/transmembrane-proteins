@@ -60,10 +60,11 @@ class Vector:
         self._data = np.array([x, y, z])
 
     def __str__(self):
-        return "[{:.4f}, {:.4f}, {:.4f}]".format(self.x, self.y, self.z)
+        return "[{:.3f}, {:.3f}, {:.3f}]".format(self.x, self.y, self.z)
 
     def __repr__(self):
-        return "[{:.4f}, {:.4f}, {:.4f}]".format(self.x, self.y, self.z)
+        return self.__str__()
+
 
     def __mul__(self, value):
         """Multiplication"""
