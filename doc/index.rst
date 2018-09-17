@@ -5,20 +5,12 @@
 
 
 .. toctree::
+   :caption: Documentation
    :maxdepth: 2
-   :caption: Contents:
 
-.. automodule:: main
-   :members:
-
-.. automodule:: src.vector
-   :members:
-
-.. autoclass:: src.vector.Vector
-   :members:
-
-.. automodule:: src.sphere
-   :members:
-
-.. automodule:: src.protein
-   :members:
+   README
+   main
+   vector
+   sphere
+   pdb
+   protein

@@ -1,0 +1,8 @@
+cmd.load('data/1uaz_tm_new.pdb')
+cmd.pseudoatom('pt1', pos=[-6.208272977996752, -3.9455513659057284, -69.58653813559323])
+cmd.pseudoatom('pt2', pos=[6.208272977996752, 3.9455513659057284, 69.58653813559323])
+cmd.distance('/pt1', '/pt2')
+cmd.set('dash_gap', '0')
+cmd.set('dash_radius', '0.3')
+cmd.set('dash_round_ends', '0')
+cmd.set('dash_color', '0xffcc00', 'dist01')

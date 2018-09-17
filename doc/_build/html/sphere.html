@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; Transmembrane Protein Areas 1.0 documentation</title>
+  <title>Sphere module &mdash; Transmembrane Protein Areas 1.0 documentation</title>
   
 
   
@@ -27,7 +27,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PDB module" href="pdb.html" />
+    <link rel="prev" title="Vector class" href="vector.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -59,7 +61,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -77,11 +79,11 @@
             
             
               <p class="caption"><span class="caption-text">Documentation</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
 <li class="toctree-l1"><a class="reference internal" href="main.html">Main program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vector.html">Vector class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sphere.html">Sphere module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sphere module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pdb.html">PDB module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protein.html">Protein module</a></li>
 </ul>
@@ -129,12 +131,14 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Search</li>
+      <li>Sphere module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/sphere.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -146,24 +150,48 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search
-      functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="module-src.sphere">
+<span id="sphere-module"></span><h1>Sphere module<a class="headerlink" href="#module-src.sphere" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-sphere"></span><dl class="function">
+<dt id="src.sphere.generate_points_on_sphere">
+<code class="descclassname">src.sphere.</code><code class="descname">generate_points_on_sphere</code><span class="sig-paren">(</span><em>num_points</em><span class="sig-paren">)</span><a class="headerlink" href="#src.sphere.generate_points_on_sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate <em>num_points</em> points evenly distributed on a hemisphere,
+centered on the center of mass of the protein thanks to the
+golden angle 3 - sqrt(5).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>com_coordinates</strong> – Coordinates of the center of mass of the protein</li>
+<li><strong>num_points</strong> – Number of desired points on the hemisphere</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Numpy array of n 3D cartesian coordinates
+centered on the center of mass of the protein</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
-  
-  <div id="search-results">
-  
-  </div>
+</div>
+
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pdb.html" class="btn btn-neutral float-right" title="PDB module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="vector.html" class="btn btn-neutral" title="Vector class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -204,7 +232,6 @@
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-      <script type="text/javascript" src="_static/searchtools.js"></script>
 
   
 
@@ -214,14 +241,7 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
-   
-
+  </script> 
 
 </body>
 </html>

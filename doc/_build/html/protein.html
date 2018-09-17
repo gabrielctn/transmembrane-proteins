@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Protein module &mdash; Transmembrane Protein Areas 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="PDB module" href="pdb.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Transmembrane Protein Areas
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Main program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vector.html">Vector class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphere.html">Sphere module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdb.html">PDB module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Protein module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Transmembrane Protein Areas</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Protein module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/protein.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-src.protein">
+<span id="protein-module"></span><h1>Protein module<a class="headerlink" href="#module-src.protein" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-protein"></span><dl class="function">
+<dt id="src.protein.build_prot_dict">
+<code class="descclassname">src.protein.</code><code class="descname">build_prot_dict</code><span class="sig-paren">(</span><em>pdb_file</em>, <em>accessible_residues</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.build_prot_dict" title="Permalink to this definition">¶</a></dt>
+<dd><ol class="arabic simple">
+<li>Get the coordinates of alpha carbones in the PDB</li>
+<li>Check if the residue is accessible to solvant</li>
+<li><dl class="first docutils">
+<dt>Builds a dictionnary compiling infos on:</dt>
+<dd><ul class="first last">
+<li>3D coordinates of accessible residues</li>
+<li>value of relative accessibility to solvant</li>
+<li>residue name</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>pdb_file: The protein’s PDB file
+accessible_residues: Dictionnary containing the accessible residues and their relative accessibility value</dd>
+<dt>Returns:</dt>
+<dd><dl class="first docutils">
+<dt>dict: Residue_id:</dt>
+<dd><ul class="first last simple">
+<li>Vector(x, y, z)</li>
+<li>All_atoms_rel_accessibility_value</li>
+<li>Residue_name</li>
+</ul>
+</dd>
+</dl>
+<p class="last">Vector: Protein’s center_of_mass</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.protein.generate_membranes">
+<code class="descclassname">src.protein.</code><code class="descname">generate_membranes</code><span class="sig-paren">(</span><em>processed_lines</em>, <em>best_results</em>, <em>resolution</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.generate_membranes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate points in the space to simulate the membranes.
+They will be represented in PyMol at the end as 2 planes like both membranes.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>processed_lines: A list containing lines (dictionaries) with their</dt>
+<dd>respective slices infos and values of average
+hydrophobicity</dd>
+<dt>best_results: A list [(plane_normal, average_hydrophobicity),</dt>
+<dd>start_index, best_index, best, nb_steps,
+shortest_distance]</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>tuple: points_membrane_1, points_membrane_2</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.protein.get_best_results">
+<code class="descclassname">src.protein.</code><code class="descname">get_best_results</code><span class="sig-paren">(</span><em>processed_lines</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.get_best_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the results of the parallelization.
+Finds the line with the highest average hydrophobicity value and determines
+the range of slices maximizing the accessible residues hydrophobicity,
+which will point to the famous transmembrane area !</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>processed_lines: A list containing lines (dictionaries) with their</dt>
+<dd>respective slices infos and values of average
+hydrophobicity</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>list: [(plane_normal, average_hydrophobicity), start_index,</dt>
+<dd>best_index, best, nb_steps, shortest_distance]</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.protein.get_com">
+<code class="descclassname">src.protein.</code><code class="descname">get_com</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>nb_ca</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.get_com" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Center Of Mass from a list of coordinates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> – Cumulative sum of C_alpha’s x coordinates</li>
+<li><strong>y</strong> – Cumulative sum of C_alpha’s y coordinates</li>
+<li><strong>z</strong> – Cumulative sum of C_alpha’s z coordinates</li>
+<li><strong>nb_ca</strong> – Number of alpha carbons in the protein</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The center of mass of the protein as Vector(x, y, z)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="vector.html#src.vector.Vector" title="src.vector.Vector">src.vector.Vector</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.protein.keep_accessible_residues">
+<code class="descclassname">src.protein.</code><code class="descname">keep_accessible_residues</code><span class="sig-paren">(</span><em>naccess_rsa</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.keep_accessible_residues" title="Permalink to this definition">¶</a></dt>
+<dd><p>From the output of naccess we keep only accessible residues
+which have a all_atoms_rel value &gt; 30 (arbitrary threshold)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>naccess_rsa</strong> – A dictionnary containing the output of naccess’s calculations</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Keys are the residue ids and as value their solvant accessible area</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.protein.max_sub_array_sum">
+<code class="descclassname">src.protein.</code><code class="descname">max_sub_array_sum</code><span class="sig-paren">(</span><em>array</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.max_sub_array_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of the Kadane’s algorithm to solve the maximum sub-array
+problem in O(n) time and O(1) space. It finds the maximum contiguous subarray
+and print its starting and end index. Here it will return the indexes of the
+slices between which there is the maximum hydrophobicity: the area of the membrane !</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>array: Numpy array containing the relative hydrophobicity of all</dt>
+<dd>the slices of the best line</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>tuple: (a, b, c) such that sum(array[a:b]) == c and c is maximal</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.protein.scale_ca_coords">
+<code class="descclassname">src.protein.</code><code class="descname">scale_ca_coords</code><span class="sig-paren">(</span><em>prot_dict</em>, <em>center_of_mass</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.scale_ca_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place the cartesian system centered in (0, 0, 0) origin</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prot_dict</strong> – Coordinates of all c_alphas of the protein</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="src.protein.slice_relative_hydrophobicity">
+<code class="descclassname">src.protein.</code><code class="descname">slice_relative_hydrophobicity</code><span class="sig-paren">(</span><em>residues</em>, <em>nb_residues_in_slice</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.slice_relative_hydrophobicity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the relative hydrophobicity of a list of residues</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><img class="math" src="_images/math/b8804d05cbfff911b7bb4fbb07aa657f202814bb.png" alt="Relative\ hydrophobicity = \frac{hydrophobe\ residues}{total\ residues}"/></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="pdb.html" class="btn btn-neutral" title="PDB module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Gabriel Cretin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

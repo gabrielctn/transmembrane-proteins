@@ -27,7 +27,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="README" href="README.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -76,8 +77,16 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Main program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vector.html">Vector class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphere.html">Sphere module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdb.html">PDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protein.html">Protein module</a></li>
+</ul>
+
             
           
         </div>
@@ -141,490 +150,32 @@
            <div itemprop="articleBody">
             
   <div class="toctree-wrapper compound">
-</div>
-<span class="target" id="module-main"></span><dl class="docutils">
-<dt>Usage:</dt>
-<dd>main.py FILE [–naccess PATH] [–points NUM]</dd>
-<dt>Options:</dt>
-<dd><table class="first last docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
-<tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
-<td>Show this</td></tr>
-<tr><td class="option-group" colspan="2">
-<kbd><span class="option">-n <var>PATH</var></span>, <span class="option">--naccess <var>PATH</var></span></kbd></td>
-</tr>
-<tr><td>&#160;</td><td>Absolute path to local naccess binary</td></tr>
-<tr><td class="option-group" colspan="2">
-<kbd><span class="option">-p <var>NUM</var></span>, <span class="option">--points <var>NUM</var></span></kbd></td>
-</tr>
-<tr><td>&#160;</td><td>Number of points to generate on the hemisphere to criss-cross the protein.
-A high number will give better results, but longer calculations. [default: 250]</td></tr>
-</tbody>
-</table>
-</dd>
-</dl>
-<dl class="function">
-<dt id="main.loop">
-<code class="descclassname">main.</code><code class="descname">loop</code><span class="sig-paren">(</span><em>processed_lines</em>, <em>prot_dict</em>, <em>sphere_point</em><span class="sig-paren">)</span><a class="headerlink" href="#main.loop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Main loop doing the calculations for 1 line of the sphere.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>processed_lines</strong> – An array of dictionaries containing the processed lines</li>
-<li><strong>prot_dict</strong> – A dictionary compiling coordinates and more infos on
-every c_alphas of the protein</li>
-<li><strong>sphere_point</strong> – Coordinates of a point of the hemisphere.
-Iterative argument of type Vector(x, y, z). Changes
-on each iteration of the function for the parallelization</li>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#transmembrane-protein-area">Transmembrane Protein Area</a></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The line processed during the current iteration,
-appended to the array containing all other lines processed</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="main.process_slices_of_line">
-<code class="descclassname">main.</code><code class="descname">process_slices_of_line</code><span class="sig-paren">(</span><em>dist_ca_to_plane</em>, <em>line</em>, <em>nb_steps</em><span class="sig-paren">)</span><a class="headerlink" href="#main.process_slices_of_line" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the relative hydrophobicity of all slices of the current line.
-The slice slides along its line with a step of 1 angström</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>dist_ca_to_plane</strong> – Distances between all c_alphas and the plane.
-Distances are being updated for each iteration.</li>
-<li><strong>line</strong> – Dictionary compiling the line’s slices hydrophobicity info and
-the average_hydrophobicity of the line</li>
-<li><strong>nb_steps</strong> – Number of slices to create along the current line to cover
-the whole protein</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Nothing. Updates values inplace.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<span class="target" id="module-src.vector"></span><span class="target" id="module-vector"></span><dl class="class">
-<dt id="src.vector.Vector">
-<em class="property">class </em><code class="descclassname">src.vector.</code><code class="descname">Vector</code><span class="sig-paren">(</span><em>x=0</em>, <em>y=0</em>, <em>z=0</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="class">
-<dt id="src.vector.Vector.Vector">
-<em class="property">class </em><code class="descname">Vector</code><a class="headerlink" href="#src.vector.Vector.Vector" title="Permalink to this definition">¶</a></dt>
-<dt>
-<code class="descname">This class implements 3D vectors (x, y, z) on top of numpy arrays</code></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="src.vector.Vector.x">
-<code class="descname">x</code><a class="headerlink" href="#src.vector.Vector.x" title="Permalink to this definition">¶</a></dt>
-<dd><p>x coordinate</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="src.vector.Vector.y">
-<code class="descname">y</code><a class="headerlink" href="#src.vector.Vector.y" title="Permalink to this definition">¶</a></dt>
-<dd><p>y coordinate</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="src.vector.Vector.z">
-<code class="descname">z</code><a class="headerlink" href="#src.vector.Vector.z" title="Permalink to this definition">¶</a></dt>
-<dd><p>z coordinate</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.__add__">
-<code class="descname">__add__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__add__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Addition</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.__mul__">
-<code class="descname">__mul__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__mul__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiplication</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.__neg__">
-<code class="descname">__neg__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__neg__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Signing</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.__radd__">
-<code class="descname">__radd__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__radd__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Commutative version of Addition</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.__rmul__">
-<code class="descname">__rmul__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__rmul__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Commutative version of Multiplication</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.__rsub__">
-<code class="descname">__rsub__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__rsub__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Commutative version of Subtraction</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.__rtruediv__">
-<code class="descname">__rtruediv__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__rtruediv__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Commutative version of Division</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.__sub__">
-<code class="descname">__sub__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__sub__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Subtraction</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.__truediv__">
-<code class="descname">__truediv__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.__truediv__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Division</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.dist_to_plane">
-<code class="descname">dist_to_plane</code><span class="sig-paren">(</span><em>normal</em><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.dist_to_plane" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the distance between a 3D point and a plane</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>normal</strong> – The normal vector of the plane</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="src.vector.Vector.norm">
-<code class="descname">norm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.vector.Vector.norm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the norm (length, magnitude) of a vector</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">x</code></dt>
-<dd><p>Gives the first element of the vector</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">y</code></dt>
-<dd><p>Gives the second element of the vector</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">z</code></dt>
-<dd><p>Gives the third element of the vector</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt>
-<em class="property">class </em><code class="descclassname">src.vector.</code><code class="descname">Vector</code><span class="sig-paren">(</span><em>x=0</em>, <em>y=0</em>, <em>z=0</em><span class="sig-paren">)</span></dt>
-<dd><dl class="class">
-<dt>
-<em class="property">class </em><code class="descname">Vector</code></dt>
-<dt>
-<code class="descname">This class implements 3D vectors (x, y, z) on top of numpy arrays</code></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">x</code></dt>
-<dd><p>x coordinate</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">y</code></dt>
-<dd><p>y coordinate</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">z</code></dt>
-<dd><p>z coordinate</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">__add__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Addition</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">__mul__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Multiplication</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">__neg__</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
-<dd><p>Signing</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">__radd__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Commutative version of Addition</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">__rmul__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Commutative version of Multiplication</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">__rsub__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Commutative version of Subtraction</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">__rtruediv__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Commutative version of Division</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">__sub__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Subtraction</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">__truediv__</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Division</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">dist_to_plane</code><span class="sig-paren">(</span><em>normal</em><span class="sig-paren">)</span></dt>
-<dd><p>Calculates the distance between a 3D point and a plane</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>normal</strong> – The normal vector of the plane</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">norm</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
-<dd><p>Calculate the norm (length, magnitude) of a vector</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">x</code></dt>
-<dd><p>Gives the first element of the vector</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">y</code></dt>
-<dd><p>Gives the second element of the vector</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">z</code></dt>
-<dd><p>Gives the third element of the vector</p>
-</dd></dl>
-
-</dd></dl>
-
-<span class="target" id="module-src.sphere"></span><span class="target" id="module-sphere"></span><dl class="function">
-<dt id="src.sphere.generate_points_on_sphere">
-<code class="descclassname">src.sphere.</code><code class="descname">generate_points_on_sphere</code><span class="sig-paren">(</span><em>num_points</em><span class="sig-paren">)</span><a class="headerlink" href="#src.sphere.generate_points_on_sphere" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate <em>num_points</em> points evenly distributed on a hemisphere,
-centered on the center of mass of the protein thanks to the
-golden angle 3 - sqrt(5).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>com_coordinates</strong> – Coordinates of the center of mass of the protein</li>
-<li><strong>num_points</strong> – Number of desired points on the hemisphere</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Numpy array of n 3D cartesian coordinates
-centered on the center of mass of the protein</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<span class="target" id="module-src.protein"></span><span class="target" id="module-protein"></span><dl class="function">
-<dt id="src.protein.build_prot_dict">
-<code class="descclassname">src.protein.</code><code class="descname">build_prot_dict</code><span class="sig-paren">(</span><em>pdb_file</em>, <em>accessible_residues</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.build_prot_dict" title="Permalink to this definition">¶</a></dt>
-<dd><ol class="arabic simple">
-<li>Get the coordinates of alpha carbones in the PDB</li>
-<li>Check if the residue is accessible to solvant</li>
-<li><dl class="first docutils">
-<dt>Builds a dictionnary compiling infos on:</dt>
-<dd><ul class="first last">
-<li>3D coordinates of accessible residues</li>
-<li>value of relative accessibility to solvant</li>
-<li>residue name</li>
-</ul>
-</dd>
-</dl>
 </li>
-</ol>
-<blockquote>
-<div><dl class="docutils">
-<dt>Args:</dt>
-<dd>pdb_file: The protein’s PDB file
-accessible_residues: Dictionnary containing the accessible residues and their relative accessibility value</dd>
-<dt>Returns:</dt>
-<dd><dl class="first docutils">
-<dt>dict: Residue_id:</dt>
-<dd><ul class="first last simple">
-<li>Vector(x, y, z)</li>
-<li>All_atoms_rel_accessibility_value</li>
-<li>Residue_name</li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Main program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vector.html">Vector class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphere.html">Sphere module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdb.html">PDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protein.html">Protein module</a></li>
 </ul>
-</dd>
-</dl>
-<p class="last">Vector: Protein’s center_of_mass</p>
-</dd>
-</dl>
-</div></blockquote>
-</dd></dl>
-
-<dl class="function">
-<dt id="src.protein.get_best_line">
-<code class="descclassname">src.protein.</code><code class="descname">get_best_line</code><span class="sig-paren">(</span><em>processed_lines</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.get_best_line" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds the line with the highest average hydrophobicity value</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>processed_lines</strong> – A list containing lines (dictionaries) with their
-respective normal vector and values of average
-hydrophobicity</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(plane_normal, average_hydrophobicity)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="src.protein.get_com">
-<code class="descclassname">src.protein.</code><code class="descname">get_com</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>nb_ca</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.get_com" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the Center Of Mass from a list of coordinates</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>x</strong> – Cumulative sum of C_alpha’s x coordinates</li>
-<li><strong>y</strong> – Cumulative sum of C_alpha’s y coordinates</li>
-<li><strong>z</strong> – Cumulative sum of C_alpha’s z coordinates</li>
-<li><strong>nb_ca</strong> – Number of alpha carbons in the protein</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The center of mass of the protein as Vector(x, y, z)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#src.vector.Vector" title="src.vector.Vector">src.vector.Vector</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="src.protein.keep_accessible_residues">
-<code class="descclassname">src.protein.</code><code class="descname">keep_accessible_residues</code><span class="sig-paren">(</span><em>naccess_rsa</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.keep_accessible_residues" title="Permalink to this definition">¶</a></dt>
-<dd><p>From the output of naccess we keep only accessible residues
-which have a all_atoms_rel value &gt; 30 (arbitrary threshold)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>naccess_rsa</strong> – A dictionnary containing the output of naccess’s calculations</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Keys are the residue ids and as value their solvant accessible area</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="src.protein.scale_ca_coords">
-<code class="descclassname">src.protein.</code><code class="descname">scale_ca_coords</code><span class="sig-paren">(</span><em>prot_dict</em>, <em>center_of_mass</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.scale_ca_coords" title="Permalink to this definition">¶</a></dt>
-<dd><p>Place the cartesian system centered in (0, 0, 0) origin</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prot_dict</strong> – Coordinates of all c_alphas of the protein</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="src.protein.slice_relative_hydrophobicity">
-<code class="descclassname">src.protein.</code><code class="descname">slice_relative_hydrophobicity</code><span class="sig-paren">(</span><em>residues</em>, <em>nb_residues_in_slice</em><span class="sig-paren">)</span><a class="headerlink" href="#src.protein.slice_relative_hydrophobicity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the relative hydrophobicity of a list of residues</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><img class="math" src="_images/math/b8804d05cbfff911b7bb4fbb07aa657f202814bb.png" alt="Relative\ hydrophobicity = \frac{hydrophobe\ residues}{total\ residues}"/></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+</div>
 
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="README.html" class="btn btn-neutral float-right" title="README" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
   
 
   <hr/>
@@ -664,6 +215,7 @@ which have a all_atoms_rel value &gt; 30 (arbitrary threshold)</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
