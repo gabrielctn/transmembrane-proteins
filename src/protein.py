@@ -12,7 +12,6 @@ from operator import itemgetter
 import sys
 
 
-
 def get_com(x, y, z, nb_ca):
     """Calculate the Center Of Mass from a list of coordinates
 
@@ -26,6 +25,7 @@ def get_com(x, y, z, nb_ca):
         src.vector.Vector: The center of mass of the protein as Vector(x, y, z)
     """
     return Vector(x, y, z) / nb_ca
+
 
 def keep_accessible_residues(naccess_rsa):
     """From the output of naccess we keep only accessible residues
@@ -55,22 +55,26 @@ def build_prot_dict(pdb_file, accessible_residues):
 
         Args:
             pdb_file: The protein's PDB file
-            accessible_residues: Dictionnary containing the accessible residues and their relative accessibility value
+            accessible_residues: Dictionnary containing the accessible residues
+                            and their relative accessibility value
 
         Returns:
             dict: Residue_id:
-                    - Vector(x, y, z)
-                    - All_atoms_rel_accessibility_value
-                    - Residue_name
+                - Vector(x, y, z)
+                - All_atoms_rel_accessibility_value
+                - Residue_name
 
             Vector: Protein's center_of_mass
     """
     prot_dict = {}
-    nb_ca = 0
-    x_com = 0
-    y_com = 0
-    z_com = 0
     with open(pdb_file, 'r') as file_in:
+        nb_ca = 0
+        x = 0
+        y = 0
+        z = 0
+        x_com = 0
+        y_com = 0
+        z_com = 0
         for line in file_in:
             atom_type = line[0:6].strip()  # "ATOM " or "HETATM"
             atom_name = line[12:16].strip()
@@ -80,18 +84,19 @@ def build_prot_dict(pdb_file, accessible_residues):
                 x = float(line[30:38].strip())
                 y = float(line[38:46].strip())
                 z = float(line[46:54].strip())
-                # Cumulative sum of coordinates for the calculation
-                # of the center of mass
-                x_com += x
-                y_com += y
-                z_com += z
-                nb_ca += 1
                 # Keep the residue if it is accessible to solvant
-                # Build a dictionnary compiling all infos for the residue
+                # Build a dictionnary compiling all infos for the said residue
                 if residue_num in accessible_residues:
                     prot_dict[residue_num] = {'3Dcoords': Vector(x, y, z),
                                               'all_atoms_rel': accessible_residues[residue_num],
                                               'resName': residue_name}
+                if atom_type == "ATOM":
+                    # Cumulative sum of coordinates for the calculation
+                    # of the center of mass
+                    x_com += x
+                    y_com += y
+                    z_com += z
+                    nb_ca += 1
     return (prot_dict, get_com(x_com, y_com, z_com, nb_ca))
 
 
@@ -100,7 +105,11 @@ def scale_ca_coords(prot_dict, center_of_mass):
 
         Args:
             prot_dict: Coordinates of all c_alphas of the protein
-        """
+            center_of_mass: 3D coordinates of the protein's center of mass
+
+        Returns:
+            dict: The new prot_dict with new coordinates
+    """
     for c_alpha, infos in prot_dict.items():
         infos['3Dcoords'] = infos['3Dcoords'] - center_of_mass
     return prot_dict
@@ -109,18 +118,23 @@ def scale_ca_coords(prot_dict, center_of_mass):
 def slice_relative_hydrophobicity(residues, nb_residues_in_slice):
     """Calculates the relative hydrophobicity of a list of residues
 
+        Args:
+            residues: Array of 3 letters code residues in the slice
+            nb_residues_in_slice: Number of residues in the slice
+
         Returns:
             float: :math:`Relative\ hydrophobicity = \\frac{hydrophobe\ residues}{total\ residues}`
 
     """
     hydrophobes = ["PHE", "ILE", "GLY", "LEU", "MET", "TRP", "TYR", "VAL"]
     try:
-        rel_hydro = len(set(residues).intersection(hydrophobes)) / nb_residues_in_slice
+        rel_hydro = len(set(residues).intersection(
+            hydrophobes)) / nb_residues_in_slice
     except ZeroDivisionError as err:
         sys.exit("It seems like there is no residues in the slice: " + str(err))
-    assert isinstance(rel_hydro, (float, int)) == True, "Error 3: rel_hydro should be an int or a float."
+    assert isinstance(rel_hydro, (float, int)
+                      ) == True, "Error 3: rel_hydro should be an int or a float."
     return rel_hydro
-
 
 
 def max_sub_array_sum(array):
@@ -141,12 +155,11 @@ def max_sub_array_sum(array):
     for index, val in enumerate(array):
         if current + val > 0:
             current += val
-        else: # reset start position
+        else:  # reset start position
             current, current_index = 0, index + 1
         if current > best:
             start_index, best_index, best = current_index, index + 1, current
     return (start_index, best_index, best)
-
 
 
 def get_best_results(processed_lines):
@@ -173,7 +186,8 @@ def get_best_results(processed_lines):
         for line in index:
             lines.append(line)
     # Get the best line
-    best_line = max([line["line_average_hydro"] for line in lines], key=itemgetter(1))
+    best_line = max([line["line_average_hydro"]
+                     for line in lines], key=itemgetter(1))
     # Get the slices of the best line
     for line in lines:
         if line["line_average_hydro"] == best_line:
@@ -187,7 +201,7 @@ def get_best_results(processed_lines):
 
 def generate_membranes(processed_lines, best_results, resolution):
     """Generate points in the space to simulate the membranes.
-    They will be represented in PyMol at the end as 2 planes like both membranes.
+        They will be represented in PyMol at the end as 2 planes like both membranes.
 
         Args:
             processed_lines: A list containing lines (dictionaries) with their
@@ -196,6 +210,7 @@ def generate_membranes(processed_lines, best_results, resolution):
             best_results: A list [(plane_normal, average_hydrophobicity),
                                     start_index, best_index, best, nb_steps,
                                     shortest_distance]
+            resolution: Integer in angströms setting the step of sliding.
         Returns:
             tuple: points_membrane_1, points_membrane_2
     """
@@ -206,16 +221,18 @@ def generate_membranes(processed_lines, best_results, resolution):
     start_index = best_results[1]
     best_index = best_results[2]
 
-    # Distance of membrane 1 to best plane
+    # Distance of membrane 1 to best plane (the "far" plane)
     dist_m1 = resolution * (start_index + 1)
-    # Distance of membrane 2 to best plane
+    # Distance of membrane 2 to best plane (the "far" plane)
     dist_m2 = resolution * (best_index + 1)
 
     plane_normal = np.array([plane_normal.x, plane_normal.y, plane_normal.z])
 
     # We generate 2 * 500 dummy points simulating the membranes
-    point1  = np.array([plane_normal[0] + shortest_distance + dist_m1, plane_normal[1] + shortest_distance + dist_m1, plane_normal[2] + shortest_distance + dist_m1])
-    point2  = np.array([plane_normal[0] + shortest_distance + dist_m2, plane_normal[1] + shortest_distance + dist_m2, plane_normal[2] + shortest_distance + dist_m2])
+    point1 = np.array([plane_normal[0] + shortest_distance + dist_m1, plane_normal[1] +
+                       shortest_distance + dist_m1, plane_normal[2] + shortest_distance + dist_m1])
+    point2 = np.array([plane_normal[0] + shortest_distance + dist_m2, plane_normal[1] +
+                       shortest_distance + dist_m2, plane_normal[2] + shortest_distance + dist_m2])
 
     # a plane is a*x+b*y+c*z+d=0
     # [a,b,c] is the plane_normal. Thus, we have to calculate
@@ -225,11 +242,14 @@ def generate_membranes(processed_lines, best_results, resolution):
 
     # create x,y
     X, Y = np.meshgrid(range(20), range(20))
+    # Flatten X and Y into 2 arrays
     positions = np.vstack([X.ravel(), Y.ravel()])
 
     # calculate corresponding z
-    z1 = (-plane_normal[0] * positions[1] - plane_normal[1] * positions[0] - d1) * 1. / plane_normal[2]
-    z2 = (-plane_normal[0] * positions[1] - plane_normal[1] * positions[0] - d2) * 1. / plane_normal[2]
+    z1 = (-plane_normal[0] * positions[1] - plane_normal[1]
+          * positions[0] - d1) * 1. / plane_normal[2]
+    z2 = (-plane_normal[0] * positions[1] - plane_normal[1]
+          * positions[0] - d2) * 1. / plane_normal[2]
 
     points_membrane_1 = points_membrane_2 = np.zeros((400, 3))
     points_membrane_1[:, 0] = positions[1]

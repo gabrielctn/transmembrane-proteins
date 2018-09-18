@@ -11,7 +11,6 @@ import numpy as np
 from numbers import Number
 
 
-
 class Vector:
     """
     .. class:: Vector
@@ -23,6 +22,9 @@ class Vector:
         z: z coordinate
     """
 
+    #################
+    # Special methods
+    #################
     @property
     def x(self):
         """Gives the first element of the vector"""
@@ -64,7 +66,6 @@ class Vector:
 
     def __repr__(self):
         return self.__str__()
-
 
     def __mul__(self, value):
         """Multiplication"""
@@ -122,25 +123,35 @@ class Vector:
         """Signing"""
         return Vector(-self.x, -self.y, -self.z)
 
+    ################
     # Math functions
+    ################
 
     def norm(self):
         """Calculate the norm (length, magnitude) of a vector"""
-        norm = np.sqrt(self._data.dot(self._data)) # Faster than np.linalg.norm()
-        assert np.isscalar(norm) == True, "Error 4: the norm should be a scalar."
+        norm = np.sqrt(self._data.dot(self._data)
+                       )  # Faster than np.linalg.norm()
+        assert np.isscalar(
+            norm) == True, "Error 4: the norm should be a scalar."
         return norm
 
     def dist_to_plane(self, normal):
         """Calculates the distance between a 3D point and a plane
 
-        Args:
-            normal: The normal vector of the plane
+            Args:
+                normal: The normal vector of the plane
+
+            Returns:
+                float: Distance between the point and the plane given in argument
         """
         # A plane equation is: a*x+b*y+c*z+d = 0
         # [a,b,c] is the normal. Thus, we have to calculate d
         d = -(normal.norm()**2)
-        numerator = np.abs(normal.x * self.x + normal.y * self.y + normal.z * self.z + d)
+        numerator = np.abs(normal.x * self.x + normal.y *
+                           self.y + normal.z * self.z + d)
         denominator = np.sqrt(normal.x ** 2 + normal.y ** 2 + normal.z ** 2)
-        assert np.isscalar(numerator) == True, "Error 3: the numerator should be a scalar."
-        assert np.isscalar(denominator) == True, "Error 3: the denominator should be a scalar."
+        assert np.isscalar(
+            numerator) == True, "Error 3: the numerator should be a scalar."
+        assert np.isscalar(
+            denominator) == True, "Error 3: the denominator should be a scalar."
         return np.true_divide(numerator, denominator)

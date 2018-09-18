@@ -178,8 +178,8 @@ but longer calculations. [default: 250]</td></tr>
 <kbd><span class="option">-r <var>RES</var></span>, <span class="option">--resolution <var>RES</var></span></kbd></td>
 </tr>
 <tr><td>&#160;</td><td>An integer in angströms setting the
-resolution of the slicing. Setting a
-resolution to 1 will create slices along
+resolution (sliding step) of the slicing.
+Setting a resolution to 1 will create slices along
 a processed line with a step of 1 angström.
 A higher resolution will create less
 slices of the protein, and will then
@@ -211,6 +211,8 @@ every c_alphas of the protein</li>
 <li><strong>sphere_point</strong> – Coordinates of a point of the hemisphere.
 Iterative argument of type Vector(x, y, z). Changes
 on each iteration of the function for the parallelization</li>
+<li><strong>thickness</strong> – Number for the desired thickness of the slices, in angströms</li>
+<li><strong>resolution</strong> – Integer in angströms setting the step of sliding.</li>
 </ul>
 </td>
 </tr>
@@ -238,6 +240,8 @@ Distances are being updated for each iteration.</li>
 the average_hydrophobicity of the line</li>
 <li><strong>nb_steps</strong> – Number of slices to create along the current line to cover
 the whole protein</li>
+<li><strong>thickness</strong> – Number for the desired thickness of the slices, in angströms</li>
+<li><strong>resolution</strong> – Integer in angströms setting the step of sliding.</li>
 </ul>
 </td>
 </tr>
@@ -303,7 +307,6 @@ the whole protein</li>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

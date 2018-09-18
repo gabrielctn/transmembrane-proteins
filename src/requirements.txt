@@ -1,3 +1,2 @@
-docopt==0.6.2
-biopython==1.72     # For the use of package Bio.PDB.NACCESS
-m2r                 # To include the README.md in Sphinx doc
+docopt==0.6.2       # To parse the command line arguments
+biopython==1.72     # For the use of module Bio.PDB.NACCESS

@@ -16,12 +16,10 @@ def generate_points_on_sphere(num_points):
     golden angle 3 - sqrt(5).
 
     Args:
-        com_coordinates: Coordinates of the center of mass of the protein
         num_points: Number of desired points on the hemisphere
 
     Returns:
-        A Numpy array of n 3D cartesian coordinates
-        centered on the center of mass of the protein
+        A Numpy array of n 3D cartesian coordinates centered on (0,0,0)
     """
     # Generate n indices on an evenly distributed interval
     indices = np.arange(0, num_points, dtype=float) + 0.5

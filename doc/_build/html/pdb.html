@@ -161,6 +161,10 @@ with PyMol. It generates a PDB file and a .pml file.</p>
 atoms to visualize the membranes</p>
 <blockquote>
 <div><dl class="docutils">
+<dt>Args:</dt>
+<dd>pdb_file: Path to the pdb_file
+points_membrane_1: 3D coordinates of the points representing the first membrane
+points_membrane_2: 3D coordinates of the points representing the second membrane</dd>
 <dt>Returns:</dt>
 <dd>file: New PDB file with DUM atoms simulating the membranes</dd>
 </dl>
@@ -170,7 +174,19 @@ atoms to visualize the membranes</p>
 <dl class="function">
 <dt id="src.pdb.write_pml_script">
 <code class="descclassname">src.pdb.</code><code class="descname">write_pml_script</code><span class="sig-paren">(</span><em>sphere_point</em>, <em>pdb_file</em><span class="sig-paren">)</span><a class="headerlink" href="#src.pdb.write_pml_script" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write a small PyMol script to visualize the best line</p>
+<dd><p>Write a small PyMol script to visualize the best line/direction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sphere_point</strong> – A point on the hemisphere englobing the protein</li>
+<li><strong>pdb_file</strong> – Path to the pdb_file</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -228,7 +244,6 @@ atoms to visualize the membranes</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
